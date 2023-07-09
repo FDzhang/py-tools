@@ -90,3 +90,10 @@ def imgs_to_dest(src, dest):
                 # print('dest : ' + os.path.join(dest, os.path.basename(src), file))
                 shutil.copy(file_path, os.path.join(dest,target,file))
 
+
+def clean(src_dir):
+    # 获取源目录下所有的.pkg文件
+    pkgs = glob.glob(src_dir + '/' + '*.pkg')
+    for pkg in pkgs:
+        # 删除解压的目录
+        shutil.rmtree(pkg[0:-4])

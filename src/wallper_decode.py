@@ -14,7 +14,7 @@ def solve(repkg, dir):
 
 def copyTo(dir, dest_dir):
     funcs.imgs_to_dest(dir, dest_dir)
-
+    funcs.clean(dir)
 
 dirs = [
     'xxx\Steam\steamapps\workshop\content/431960/2932511679'
