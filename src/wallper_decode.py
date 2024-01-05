@@ -1,4 +1,5 @@
 import wallper_decode_funcs as funcs
+import FileUtil
 
 # 1、输入：给定一个目录列表+RePkg目录，输出：将每个目录解析的结构放到，目标目录
 # 2、对每一个目录进行单独解析
@@ -14,15 +15,33 @@ def solve(repkg, dir):
 
 def copyTo(dir, dest_dir):
     funcs.imgs_to_dest(dir, dest_dir)
+
+def clean(dir):
     funcs.clean(dir)
 
-dirs = [
-    'xxx\Steam\steamapps\workshop\content/431960/2932511679'
-]
-dest_dir = 'xxxx'
-# https://github.com/notscuffed/repkg
-repkg = 'xxxx/RePKG.exe'
-
-for dir in dirs:
+def deOne(repkg, dir, dest_dir):
     solve(repkg, dir)
     copyTo(dir, dest_dir)
+    clean(dir)
+    print(dir + 'is clean')
+
+dirs = FileUtil.getFilesByTime('D:/game/steam/Steam/steamapps/workshop/content/431960/', 5)
+# [
+#     'D:/game/steam/Steam/steamapps/workshop/content/431960/2928061980',
+# ]
+dest_dir = 'E:/night/12_05_wallper/'
+# https://github.com/notscuffed/repkg
+repkg = 'D:/0zxq/tool/pkg/RePKG.exe'
+
+# deOne(repkg, 'D:/game/steam/Steam/steamapps/workshop/content/431960/2958393187', dest_dir)
+
+cnt = 0
+for dir in dirs:
+    cnt += 1
+    solve(repkg, dir)
+    copyTo(dir, dest_dir)
+    print('cnt = ' + str(cnt))
+
+for dir in dirs:
+    clean(dir)
+    print(dir + 'is clean')
